@@ -1,0 +1,27 @@
+{% extends 'analiticos/base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<section class="page-section clearfix">
+    <div class="container">
+      <div class="intro">
+        <img class="intro-img img-fluid mb-3 mb-lg-0 rounded" src="{% static 'analiticos//img/excel-logo.jpg' %}" alt="">
+        <div class="intro-text rigth-0 text-center bg-faded p-5 rounded">
+  			<h2>Sube tu Archivo</h2>
+  			<div class= card-body >
+  				<form method="POST" enctype="multipart/form-data">
+    			{% csrf_token %}
+    			{{ form|crispy }}
+    			<button type="submit" class="btn btn-secondary">Subir</button>
+  			</form>
+  		</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

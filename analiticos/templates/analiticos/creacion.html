@@ -1,0 +1,49 @@
+{% extends "analiticos/base.html" %}
+{% load static %}
+
+{% block content %}
+
+  {% block content_header %}
+    <h2>Archivos </h2>
+    <p>
+      <a href="{% url 'subir_archivo' %}" class="btn btn-primary">Subir un Archivo</a>
+    </p>
+  {% endblock %}
+  <section class="page-section clearfix">
+  <body>
+	<div class=".container-md ">  
+	  <table class="table table-striped">
+	    <thead>
+	      <tr>
+	        <th>Nombre</th>
+	        <th>Proceso</th>
+	        <th>Utilizar</th>
+	        <th>Borrar</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      {% for modelo in modelos %}
+	        <tr>
+	          <td>{{ modelo.Nombre }}</td>
+	          <td>{{ modelo.Proceso }}</td>
+	          <td>
+				<form method="POST" action="{% url 'utilizar_archivo' archivo.pk %}">
+	              {% csrf_token %}
+	              <button type="submit" class="btn btn-danger btn-sm">utilizar</button>
+	            </form>
+	          </td>
+	          <td>
+	            <form method="POST" action="{% url 'borrar_archivo' archivo.pk %}">
+	              {% csrf_token %}
+	              <button type="submit" class="btn btn-danger btn-sm">Borrar</button>
+	            </form>
+	          </td>
+	        </tr>
+	      {% endfor %}
+	    </tbody>
+	  </table>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</body>
+</section>
+{% endblock %}
